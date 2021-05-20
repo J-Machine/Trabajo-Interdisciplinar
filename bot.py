@@ -1,8 +1,7 @@
 import logging      # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
-
 import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.ext import Updater, CommandHandler, callbackqueryhandler, conversationhandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, Filters
 
 # Variables
 TOKEN = '1862455246:AAHDE6lLYMHHYk7-p_rBSgf_L3CYRkO4IYA'
@@ -51,6 +50,19 @@ def getBotInfo(update, context):
         text=f'Hola soy el bot de la <b>Escuela Profesional de Ciencia de la Computación - UNSA</b>' # 2da manera de responder
     )
 
+# Callbacks functions
+def tramites_callback_handler(update, context):
+    # print(update.callback_query)
+    query = update.callback_query   # Recibe el mensaje
+    query.answer()  # Requerido. Responde silenciosamente
+
+    query.edit_message_text(
+        text=' CONTACTO DE EPCC\n'
+             '- Horario de atención: Lunes a viernes de 9:30 a 11AM\n'
+             '- Correo electrónico: epcc@unsa.edu.pe\n'
+             '- Teléfono: 949107364 (Miss Raquel)'
+    )
+
 # Main Function
 if __name__ == '__main__':
     mybot = telegram.Bot(token=TOKEN)
@@ -65,6 +77,16 @@ if __name__ == '__main__':
     # Crear comando y el método (acción del comando)
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("botInfo", getBotInfo))
+
+    # Crear el callback handler
+    dp.add_handler(ConversationHandler(
+        entry_points=[
+            # Al recibir el patron definido en el data del botón ejecuta la funcion callback
+            CallbackQueryHandler(pattern='contacto', callback=tramites_callback_handler)
+        ],
+        states={},
+        fallbacks=[]
+    ))
 
     # Preguntar por mensajes entrantes
     updater.start_polling()
