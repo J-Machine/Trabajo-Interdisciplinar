@@ -1,8 +1,7 @@
 import logging      # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
-
 import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-from telegram.ext import Updater, CommandHandler, callbackqueryhandler, conversationhandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, Filters
 
 # Variables
 TOKEN = '1862455246:AAHDE6lLYMHHYk7-p_rBSgf_L3CYRkO4IYA'
@@ -22,18 +21,19 @@ def start(update, context):
 
     # Botones
     btn_contacto = InlineKeyboardButton(
-        text='Información de contacto',
+        text='✉️ Contacto de EPCC',
         callback_data="contacto"
     )
     btn_tramites = InlineKeyboardButton(
-        text='Información de trámites',
+        text='🎓 Información de trámites',
         callback_data="tramite"
     )
 
-    # Lo que se muestra en 
+    # Lo que se muestra al ejecutar el comando /start
     update.message.reply_text(
-        text=f'Hola {user_Name}.\nGracias por usar nuestro bot. '
-             f'A continuación te mostramos las funciones que  puedes usar',
+        text=f'Hola {user_Name} ☺️.\nGracias por usar nuestro bot 🤖. '
+             f'A continuación te mostramos los tipos de información que podemos darte.\n'
+             f'Sólo toca la opción que te interesa.',
         reply_markup=InlineKeyboardMarkup([
             [btn_contacto],
             [btn_tramites]
@@ -48,7 +48,20 @@ def getBotInfo(update, context):
     bot.sendMessage(
         chat_id=chat_Id,
         parse_mode="HTML",
-        text=f'Hola soy el bot de la <b>Escuela Profesional de Ciencia de la Computación - UNSA</b>' # 2da manera de responder
+        text=f'Hola soy el bot 🤖 de la <b>Escuela Profesional de Ciencia de la Computación - UNSA</b>.'
+             f'Si necesitas información sobre trámites de Bachiller y Título Profesional '
+             f'puedo ayudarte. Comienza escribiendo /start.' # 2da manera de responder
+    )
+
+# Callbacks functions
+def tramites_callback_handler(update, context):
+    # print(update.callback_query)
+    query = update.callback_query   # Recibe el mensaje
+    query.answer()  # Requerido. Responde silenciosamente
+
+    query.edit_message_text(
+        parse_mode='HTML',
+        text=' <b>INFORMACIÓN DE CONTACTO DE LA EPCC</b>\n'
     )
 
 # Main Function
@@ -65,6 +78,16 @@ if __name__ == '__main__':
     # Crear comando y el método (acción del comando)
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("botInfo", getBotInfo))
+
+    # Crear el callback handler
+    dp.add_handler(ConversationHandler(
+        entry_points=[
+            # Al recibir el patron definido en el data del botón ejecuta la funcion callback
+            CallbackQueryHandler(pattern='contacto', callback=tramites_callback_handler)
+        ],
+        states={},
+        fallbacks=[]
+    ))
 
     # Preguntar por mensajes entrantes
     updater.start_polling()
