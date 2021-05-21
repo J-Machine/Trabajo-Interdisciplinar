@@ -1,6 +1,3 @@
-# BOT TELEGRAM : CONSULTAS EPCC
-#-------------------------------
-
 import logging      # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
 import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
