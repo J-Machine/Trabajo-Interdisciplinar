@@ -62,10 +62,6 @@ def tramites_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text=' <b>INFORMACIÓN DE CONTACTO DE LA EPCC</b>\n'
-             '▫️Correo electrónico: epcc@unsa.edu.pe\n'
-             '▫️Teléfono: 949107364 (Secretaría Raquel)\n'
-             '▫️Horario de atención: Lunes a viernes de 8:30 a 10:30AM (vía Meet) \n'
-             '▫ Meet de atención: meet.google.com/smh-igaw-vze\n'
     )
 
 # Main Function
