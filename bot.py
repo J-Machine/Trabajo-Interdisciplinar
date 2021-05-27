@@ -20,7 +20,7 @@ def start(update, context):
     bot = context.bot
     # chat_Id = update.message.chat_id
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha iniciado(/start) el bot')   # Consola
+    logger.info(f'El usuario {user_Name} ha iniciado(/start) el bot')   # Consola retroalimentación
 
     # Botones
     btn_contacto = InlineKeyboardButton(
@@ -47,7 +47,8 @@ def getBotInfo(update, context):
     bot = context.bot
     chat_Id= update.message.chat_id
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha solicitado información sobre el bot')
+    logger.info(f'El usuario {user_Name} ha solicitado información(/infoBot) sobre el bot')
+
     bot.sendMessage(
         chat_id=chat_Id,
         parse_mode="HTML",
@@ -87,6 +88,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("botInfo", getBotInfo))
 
     # Crear el callback handler
+    # ConversationHandler define como será la conversación
     dp.add_handler(ConversationHandler(
         entry_points=[
             # Al recibir el patron definido en el data del botón ejecuta la funcion callback
@@ -96,7 +98,7 @@ if __name__ == '__main__':
         fallbacks=[]
     ))
 
-    # Preguntar por mensajes entrantes
+    # Preguntar por mensajes entrantes to do el tiempo
     updater.start_polling()
 
     # Terminar bot con ctrl + c
