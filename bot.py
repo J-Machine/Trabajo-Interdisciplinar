@@ -1,3 +1,6 @@
+# BOT TELEGRAM : CONSULTAS EPCC
+#-------------------------------
+
 import logging      # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
 import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
@@ -17,7 +20,7 @@ def start(update, context):
     bot = context.bot
     # chat_Id = update.message.chat_id
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha iniciado(/start) el bot')   # Consola
+    logger.info(f'El usuario {user_Name} ha iniciado(/start) el bot')   # Consola retroalimentación
 
     # Botones
     btn_contacto = InlineKeyboardButton(
@@ -44,7 +47,8 @@ def getBotInfo(update, context):
     bot = context.bot
     chat_Id= update.message.chat_id
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha solicitado información sobre el bot')
+    logger.info(f'El usuario {user_Name} ha solicitado información(/infoBot) sobre el bot')
+
     bot.sendMessage(
         chat_id=chat_Id,
         parse_mode="HTML",
@@ -54,7 +58,7 @@ def getBotInfo(update, context):
     )
 
 # Callbacks functions
-def tramites_callback_handler(update, context):
+def contacto_callback_handler(update, context):
     # print(update.callback_query)
     query = update.callback_query   # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
@@ -62,6 +66,38 @@ def tramites_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text=' <b>INFORMACIÓN DE CONTACTO DE LA EPCC</b>\n'
+             '▫️Correo electrónico: epcc@unsa.edu.pe\n'
+             '▫️Teléfono: 949107364 (Secretaría Raquel)\n'
+             '▫️Horario de atención: Lunes a viernes de 8:30 a 10:30AM (vía Meet) \n'
+             '▫ Meet de atención: meet.google.com/smh-igaw-vze\n'
+    )
+
+def tramites_callback_handler(update, context):
+    # Consola retroalimentación
+    user_Name = update.effective_user["first_name"]
+    logger.info(f'El usuario {user_Name} ha seleccionado Trámites')
+
+    #Actualizando consulta
+    query = update.callback_query  # Recibe el mensaje
+    query.answer()  # Requerido. Responde silenciosamente
+
+    # Botones
+    btn_bachiller = InlineKeyboardButton(
+        text=' 🎓📃 Trámite para Bachiller',
+        callback_data="bachiller"
+    )
+    btn_titulacion = InlineKeyboardButton(
+        text=' ‍🎓📜‍ Trámite para Titulación',
+        callback_data="titulacion"
+    )
+
+    query.edit_message_text(
+        parse_mode='HTML',
+        text=f'{user_Name}, estos son los trámites de los que podemos brindarte información ☺ ',
+        reply_markup=InlineKeyboardMarkup([
+            [btn_bachiller],
+            [btn_titulacion]
+        ])
     )
 
 # Main Function
@@ -80,16 +116,18 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("botInfo", getBotInfo))
 
     # Crear el callback handler
+    # ConversationHandler define como será la conversación
     dp.add_handler(ConversationHandler(
         entry_points=[
             # Al recibir el patron definido en el data del botón ejecuta la funcion callback
-            CallbackQueryHandler(pattern='contacto', callback=tramites_callback_handler)
+            CallbackQueryHandler(pattern='contacto', callback=contacto_callback_handler),
+            CallbackQueryHandler(pattern='tramite', callback=tramites_callback_handler)
         ],
         states={},
         fallbacks=[]
     ))
 
-    # Preguntar por mensajes entrantes
+    # Preguntar por mensajes entrantes to do el tiempo
     updater.start_polling()
 
     # Terminar bot con ctrl + c
