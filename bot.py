@@ -110,7 +110,24 @@ def titulacion_callback_handler(update, context):
 
     query.edit_message_text(
         parse_mode='HTML',
-        text=f'<b>REQUISITOS PARA OBTENER EL TITULO PROFESIONAL</b> ',
+        text='<b>REQUISITOS PARA OBTENER EL TITULO PROFESIONAL</b>\n'
+             '▫️Solicitud dirigida al Decano de la facultad en formato UNSA.\n'
+             '▫️Recibo de pago de expedito para optar el Título Profesional.\n'
+             '▫️Trabajo de investigación digitalizado en formato PDF. \n'
+             '▫️Constancia emitida por la Biblioteca Virtual de autorización de publicación en el portal de Tesis '
+             'Electrónicas. \n'
+             '▫️Certificado negativo de antecedentes penales.\n'
+             '▫️Certificado oficial de estudios.\n'
+             '▫️Copia legalizada de DNI en formato A5. \n'
+             '▫️Copia legalizada del Grado de Bachiller. \n'
+             '▫️Fotografía tamaño pasaporte a color fondo blanco. \n'
+             '▫️Constancia de Egresado. \n'
+             '▫️Constancia que acredite dominio de nivel intermedio de idioma extranjero.\n'
+             '▫️Constacia de inscripción a SUNEDU del Grado Académico de Bachiller. \n'
+             '▫️Constancia de no adeudar Bienes. \n'
+             '▫️Constancia de Biblioteca. \n'
+             '▫️Recibo de Subdirección de Finanzas de pago de los derechos por todos los conceptos. \n'
+
     )
 def bachiller_callback_handler(update, context):
     # Consola retroalimentación
