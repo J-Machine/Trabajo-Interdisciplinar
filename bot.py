@@ -108,25 +108,9 @@ def titulacion_callback_handler(update, context):
     query = update.callback_query  # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
 
-    # Botones
-    # btn_bachiller = InlineKeyboardButton(
-    #     text=' 🎓📃 Trámite para Bachiller',
-    #     callback_data="bachiller"
-    # )
-    # btn_titulacion = InlineKeyboardButton(
-    #     text=' ‍🎓📜‍ Trámite para Titulación',
-    #     callback_data="titulacion"
-    # )
-
     query.edit_message_text(
         parse_mode='HTML',
-        # text=f'{user_Name}, estos son los trámites de los que podemos brindarte información 🙂 ',
-        text=f'Proximamente información para obtener el Titulo Profesional 🙂 ',
-
-        # reply_markup=InlineKeyboardMarkup([
-        #     [btn_bachiller],
-        #     [btn_titulacion]
-        # ])
+        text=f'<b>REQUISITOS PARA OBTENER EL TITULO PROFESIONAL</b> ',
     )
 def bachiller_callback_handler(update, context):
     # Consola retroalimentación
