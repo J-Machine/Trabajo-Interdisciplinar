@@ -1,0 +1,19 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.4/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCiW_vsyrMOZMPD7PazYZjE7aYJAUc9CWU",
+    authDomain: "telegram-chatbot-e0d34.firebaseapp.com",
+    projectId: "telegram-chatbot-e0d34",
+    storageBucket: "telegram-chatbot-e0d34.appspot.com",
+    messagingSenderId: "576740639103",
+    appId: "1:576740639103:web:0b843e330fe0a891de9a4a"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
