@@ -126,8 +126,7 @@ def titulacion_callback_handler(update, context):
              '▫️Constacia de inscripción a SUNEDU del Grado Académico de Bachiller. \n'
              '▫️Constancia de no adeudar Bienes. \n'
              '▫️Constancia de Biblioteca. \n'
-             '▫️Recibo de Subdirección de Finanzas de pago de los derechos por todos los conceptos. \n'
-
+             '▫️Recibo de Subdirección de Finanzas de pago de los derechos por todos los conceptos.\n'
     )
 def bachiller_callback_handler(update, context):
     # Consola retroalimentación
@@ -140,12 +139,12 @@ def bachiller_callback_handler(update, context):
 
     # Botones
     btn_modo_articulo = InlineKeyboardButton(
-        text=' 📃 Modalidad por Artículo Científico',
-        callback_data="articulo"
+        text=' 📃 Modalidad por Artículo de Publicación',
+        callback_data="bach_articulo"
     )
     btn_modo_proyecto = InlineKeyboardButton(
-        text=' 📃 Modalidad por Proyecto de Investigación',
-        callback_data="proyecto"
+        text=' 📃 Modalidad por Trabajo de Investigación',
+        callback_data="bach_investigacion"
     )
 
     query.edit_message_text(
@@ -156,6 +155,50 @@ def bachiller_callback_handler(update, context):
             [btn_modo_proyecto]
         ])
     )
+
+def bach_articulo_callback_handler(update, context):
+    # Consola retroalimentación
+    user_Name = update.effective_user["first_name"]
+    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Bachiller > Artículo Científico')
+
+    # Actualizando consulta
+    query = update.callback_query  # Recibe el mensaje
+    query.answer()  # Requerido. Responde silenciosamente
+
+    query.edit_message_text(
+        parse_mode='HTML',
+        text='<b>REQUISITOS PARA OBTENER EL GRADO ACADÉMICO DE BACHILLER</b>\n'
+             '<b>MODALIDAD: <em>ARTÍCULO DE PUBLICACIÓN</em></b>\n'
+             '▫️Pronto más información de esta modalidad.\n'
+    )
+
+def bach_investigacion_callback_handler(update, context):
+    # Consola retroalimentación
+    user_Name = update.effective_user["first_name"]
+    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Bachiller > Trabajo de Invetigación')
+
+    # Actualizando consulta
+    query = update.callback_query  # Recibe el mensaje
+    query.answer()  # Requerido. Responde silenciosamente
+
+    query.edit_message_text(
+        parse_mode='HTML',
+        text='<b>REQUISITOS PARA OBTENER EL GRADO ACADÉMICO DE BACHILLER</b>\n'
+             '<b>MODALIDAD: <em>TRABAJO DE INVESTIGACIÓN</em></b>\n'
+             '▫️Solicitud dirigida al Decano de la facultad en formato UNSA.\n'
+             '▫️Trabajo de investigación digitalizado en formato PDF. \n'
+             '▫️Constancia emitida por la Biblioteca Virtual de autorización de publicación en el Repositorio.\n'
+             '▫️Certificado negativo de antecedentes penales.\n'
+             '▫️Certificado oficial de estudios.\n'
+             '▫️Copia legalizada de DNI en formato A5. \n'
+             '▫️Fotografía tamaño pasaporte a color fondo blanco. \n'
+             '▫️Constancia de Egresado. \n'
+             '▫️Constancia que acredite dominio de nivel intermedio de idioma extranjero.\n'
+             '▫️Constancia de no adeudar Bienes a la facultad. \n'
+             '▫️Constancia de no adeudar material bibliográfico (Dirección general de Biblioteca). \n'
+             '▫️Recibo de Subdirección de Finanzas de pago de los derechos por todos los conceptos. \n'
+    )
+
 # Main Function
 if __name__ == '__main__':
     mybot = telegram.Bot(token=TOKEN)
@@ -179,7 +222,9 @@ if __name__ == '__main__':
             CallbackQueryHandler(pattern='contacto', callback=contacto_callback_handler),
             CallbackQueryHandler(pattern='tramite', callback=tramites_callback_handler),
             CallbackQueryHandler(pattern='bachiller', callback=bachiller_callback_handler),
-            CallbackQueryHandler(pattern='titulacion', callback=titulacion_callback_handler)
+            CallbackQueryHandler(pattern='titulacion', callback=titulacion_callback_handler),
+            CallbackQueryHandler(pattern='bach_articulo', callback=bach_articulo_callback_handler),
+            CallbackQueryHandler(pattern='bach_investigacion', callback=bach_investigacion_callback_handler)
         ],
         states={},
         fallbacks=[]
