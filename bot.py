@@ -28,7 +28,8 @@ def getBotInfo(update, context):
         parse_mode="HTML",
         text=f'Hola soy el bot 🤖 de la <b>Escuela Profesional de Ciencia de la Computación - UNSA</b>.'
              f'Si necesitas información sobre trámites de Bachiller y Título Profesional '
-             f'puedo ayudarte. Comienza escribiendo /start.' # 2da manera de responder
+             f'puedo ayudarte. Comienza escribiendo /start. \n' 
+             f'También puedes escribirme en el chat y trataré de mostrarte la información más adecuada.'  # 2da manera de responder
     )
 
 # # Botones
@@ -99,10 +100,11 @@ def mensaje(update, context):
         if badWord2[k] in text:
             bot.sendMessage(
                 chat_id=chatId,
-                text='🤖: Perfecto!\n'
+                text='🤖: ¡Perfecto!\n'
                      '🤖: Elige una de las opciones:',
                 reply_markup=InlineKeyboardMarkup([
-                    [btn_tramites],
+                    [btn_bachiller],
+                    [btn_titulacion],
                     [btn_terminar]
                 ])
             )
@@ -156,6 +158,17 @@ def bot_feedback(update, context):
              f'🤖: Si hay algo mas en lo que pueda ayudarte, escríbeme...\n'
     )
 
+## botones de tramites
+
+btn_bachiller = InlineKeyboardButton(
+    text=' 🎓📃 Trámite para Bachiller',
+    callback_data="bachiller"
+)
+btn_titulacion = InlineKeyboardButton(
+    text=' ‍🎓📜‍ Trámite para Titulación',
+    callback_data="titulacion"
+)
+
 
 def tramites_callback_handler(update, context):
     # Consola retroalimentación
@@ -165,16 +178,6 @@ def tramites_callback_handler(update, context):
     #Actualizando consulta
     query = update.callback_query  # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
-
-    # Botones
-    btn_bachiller = InlineKeyboardButton(
-        text=' 🎓📃 Trámite para Bachiller',
-        callback_data="bachiller"
-    )
-    btn_titulacion = InlineKeyboardButton(
-        text=' ‍🎓📜‍ Trámite para Titulación',
-        callback_data="titulacion"
-    )
 
     query.edit_message_text(
         parse_mode='HTML',
@@ -350,7 +353,7 @@ if __name__ == '__main__':
 
     # Crear comando y el método (acción del comando)
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("botInfo", getBotInfo))
+    dp.add_handler(CommandHandler("info", getBotInfo))
     dp.add_handler(MessageHandler(Filters.text, mensaje))   # Maneja las key words para la conversación
 
     # Crear el callback handler
