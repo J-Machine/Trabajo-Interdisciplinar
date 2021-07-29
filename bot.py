@@ -1,8 +1,9 @@
 # BOT TELEGRAM : CONSULTAS EPCC
 #-------------------------------
-# Implementación de diálogo
+# Implementación de Lectura de Base de datos
 
-import logging      # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
+import logging  # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
+
 import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, Filters
