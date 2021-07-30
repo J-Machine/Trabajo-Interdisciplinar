@@ -19,8 +19,8 @@ main_nodo = list_child_DB[0]  # key del 1er nodo donde se almacena la informacio
 
 
 # ### Funciones
-def select_list_tramite(tramite):
-    """Devuelve la lista de:
+def select_list_info(tramite):
+    """ Devuelve la lista de:
         0: contacto,
         1: bachiller automatico,
         2: bachiller trabajo investigacion,
@@ -57,5 +57,5 @@ def print_requisitos(list_requerimientos, col_name, id_show=True):
             print(row_req[col_name])
 
 
-print('REQUISITOS BACHILLER \n')
-print_requisitos(select_list_tramite(1), 'Requisito', True)
+# print('REQUISITOS BACHILLER \n')
+# print_requisitos(select_list_info(0), 'Información', True)
