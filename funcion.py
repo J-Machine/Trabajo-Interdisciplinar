@@ -1,12 +1,5 @@
-def verificar(lista):
-
-# Key words
-# badWord = ['hol', 'Hol', 'Buenos', 'buenos', 'Buenas', 'buenas']
-# badWord1 = ['consultar', 'Consultar', 'Buscando', 'buscando', 'Información', 'información', 'informacion',
-#           'Informacion']
-# badWord2 = ['Título', 'título', 'Titulo', 'titulo', 'Bachiller', 'bachiller', 'Tramitar', 'tramitar', 'Tramites',
-#           'tramites', 'trámites', 'Trámites']
-# badWord3 = ['Secretaría', 'secretaría', 'Contacto', 'contacto', 'escuela']
+# INTERACCIÓN A TRAVÉS DE DIÁLOGO
+# --------------------------------
 
 hello = [['ho', 'Ho', 'la', 'ol', ], ['Bu', 'bu', 'en', 'nas', 'nos']]
 pal = ['ba', 'Ba', 'chi', 'lle']
