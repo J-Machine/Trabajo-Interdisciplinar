@@ -20,11 +20,11 @@ logging.basicConfig(
 logger = logging.getLogger()
 
 # Funciones para comandos
-def getBotInfo(update, context):
+def ayuda (update, context):
     bot = context.bot
     chat_Id= update.message.chat_id
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha solicitado información(/infoBot) sobre el bot')
+    logger.info(f'El usuario {user_Name} ha solicitado Ayuda (/help) sobre el bot')
 
     bot.sendMessage(
         chat_id=chat_Id,
@@ -32,10 +32,10 @@ def getBotInfo(update, context):
         text=f'Hola soy el bot 🤖 de la <b>Escuela Profesional de Ciencia de la Computación - UNSA</b>.'
              f'Si necesitas información sobre trámites de Bachiller y Título Profesional '
              f'puedo ayudarte. Comienza escribiendo /start. \n' 
-             f'También puedes escribirme en el chat y trataré de mostrarte la información más adecuada.'  # 2da manera de responder
+             f'También puedes escribirme en el chat y trataré de mostrarte la información más adecuada.'
     )
 
-# # Botones para start
+## Botones para start
 btn_contacto = InlineKeyboardButton(
     text='✉️ Contacto de EPCC',
     callback_data="contacto"
@@ -53,7 +53,7 @@ def start(update, context):
     bot = context.bot
     # chat_Id = update.message.chat_id
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha iniciado(/start) el bot')   # Consola retroalimentación
+    logger.info(f'El usuario {user_Name} ha iniciado (/start) el bot')   # Consola retroalimentación
 
     # Lo que se muestra al ejecutar el comando /start
     update.message.reply_text(
@@ -368,7 +368,7 @@ if __name__ == '__main__':
 
     # Crear comando y el método (acción del comando)
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("info", getBotInfo))
+    dp.add_handler(CommandHandler("help", ayuda))
     dp.add_handler(MessageHandler(Filters.text, mensaje))   # Maneja las key words para la conversación
 
     # Crear el callback handler
