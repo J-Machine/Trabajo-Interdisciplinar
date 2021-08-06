@@ -127,16 +127,6 @@ def mensaje(update, context):
             break
             
 def bot_feedback(update, context):
-    # update.message.reply_photo(
-    #     'https://drive.google.com/file/d/1aXFhaBXeS3DpxB10KmJx13m645V4mWrl/view?usp=sharing')
-    # update.message.reply_text(  # se enviara un mensaje al chat
-    #     parse_mode='HTML',
-    #     text=' <b>INFORMACIÓN DE CONTACTO DE LA EPCC</b>\n'
-    #          '▫️Correo electrónico: epcc@unsa.edu.pe\n'
-    #          '▫️Teléfono: 949107364 (Secretaría Raquel)\n'
-    #          '▫️Horario de atención: Lunes a viernes de 8:30 a 10:30AM (vía Meet) \n'
-    #          '▫ Meet de atención: meet.google.com/smh-igaw-vze\n'
-    # )
     update.message.reply_text(  # se enviara un mensaje al chat
         text=f'🤖: Aquí tienes lo solicitado ☺️.\n'
              f'🤖: Si hay algo mas en lo que pueda ayudarte, escríbeme...\n'
@@ -227,7 +217,7 @@ def tramites_callback_handler(update, context):
         ])
     )
 
-def bachiller_callback_handler(update, context):
+def bachiller_callback_handler(update, context):    # opciones de obtención de bachiller
     # Consola retroalimentación
     user_Name = update.effective_user["first_name"]
     logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Bachiller')
@@ -263,7 +253,7 @@ def bachiller_callback_handler(update, context):
 def bach_automatico_callback_handler(update, context):
     # Consola retroalimentación
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Bachiller > Artículo Científico')
+    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Bachiller > Bach. Automático')
     btn_back = InlineKeyboardButton(
         text=' ⬅️Atrás',
         callback_data="bachiller"
@@ -275,7 +265,8 @@ def bach_automatico_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL GRADO ACADÉMICO DE BACHILLER</b>\n' 
-             '<b>MODALIDAD: <em>BACHILLER AUTOMÁTICO 2021</em></b>\n' + string_bach_automatico,
+             '<b>MODALIDAD: <em>BACHILLER AUTOMÁTICO 2021</em></b>\n' + string_bach_automatico + '\n'
+             'Más información en ➡️ https://fips.unsa.edu.pe/tramites-administrativos-academicos/ \n',
         reply_markup=InlineKeyboardMarkup([
             [btn_back]
         ])
@@ -298,21 +289,55 @@ def bach_investigacion_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL GRADO ACADÉMICO DE BACHILLER</b>\n'
-             '<b>MODALIDAD: <em>TRABAJO DE INVESTIGACIÓN</em></b>\n' + string_bach_ti,
+             '<b>MODALIDAD: <em>TRABAJO DE INVESTIGACIÓN</em></b>\n' + string_bach_ti + '\n'+
+             'Más información en ➡️ https://fips.unsa.edu.pe/tramites-administrativos-academicos/ \n',
         reply_markup=InlineKeyboardMarkup([
             [btn_back]
         ])
     )
     terminar(query, update)
 
-def titulacion_callback_handler(update, context):
+def titulacion_callback_handler(update, context):    # opciones de obtención de bachiller
     # Consola retroalimentación
     user_Name = update.effective_user["first_name"]
-    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Titulacion')
-    # boton
+    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Titulación')
+
+    #Actualizando consulta
+    query = update.callback_query  # Recibe el mensaje
+    query.answer()  # Requerido. Responde silenciosamente
+
+    # Botones
+    btn_modo_tesis = InlineKeyboardButton(
+        text=' 📃 Modalidad de Titulación por Tesis',
+        callback_data="titulo_tesis"
+    )
+    btn_modo_suficiencia = InlineKeyboardButton(
+        text=' 📃 Modalidad de Titulación por Suficiencia',
+        callback_data="titulo_suficiencia"
+    )
     btn_back = InlineKeyboardButton(
         text=' ⬅️Atrás',
         callback_data="tramite"
+    )
+
+    query.edit_message_text(
+        parse_mode='HTML',
+        text=f'🤖: Estas son las dos modalidades para obtener el <b>Título Profesionalr</b> 👇',
+        reply_markup=InlineKeyboardMarkup([
+            [btn_modo_tesis],
+            [btn_modo_suficiencia],
+            [btn_back]
+        ])
+    )
+
+def titulacion_tesis_callback_handler(update, context):
+    # Consola retroalimentación
+    user_Name = update.effective_user["first_name"]
+    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Titulacion > Tesis')
+    # boton
+    btn_back = InlineKeyboardButton(
+        text=' ⬅️Atrás',
+        callback_data="titulacion"
     )
     #Actualizando consulta
     query = update.callback_query  # Recibe el mensaje
@@ -320,28 +345,41 @@ def titulacion_callback_handler(update, context):
 
     query.edit_message_text(
         parse_mode='HTML',
-        text='<b>REQUISITOS PARA OBTENER EL TITULO PROFESIONAL</b>\n'
-             '▫️Solicitud dirigida al Decano de la facultad en formato UNSA.\n'
-             '▫️Recibo de pago de expedito para optar el Título Profesional.\n'
-             '▫️Trabajo de investigación digitalizado en formato PDF. \n'
-             '▫️Constancia emitida por la Biblioteca Virtual de autorización de publicación en el portal de Tesis '
-             'Electrónicas. \n'
-             '▫️Certificado negativo de antecedentes penales.\n'
-             '▫️Certificado oficial de estudios.\n'
-             '▫️Copia legalizada de DNI en formato A5. \n'
-             '▫️Copia legalizada del Grado de Bachiller. \n'
-             '▫️Fotografía tamaño pasaporte a color fondo blanco. \n'
-             '▫️Constancia de Egresado. \n'
-             '▫️Constancia que acredite dominio de nivel intermedio de idioma extranjero.\n'
-             '▫️Constacia de inscripción a SUNEDU del Grado Académico de Bachiller. \n'
-             '▫️Constancia de no adeudar Bienes. \n'
-             '▫️Constancia de Biblioteca. \n'
-             '▫️Recibo de Subdirección de Finanzas de pago de los derechos por todos los conceptos.\n',
+        text='<b>REQUISITOS PARA OBTENER EL TÍTULO PROFESIONAL</b>\n'
+             '<b>MODALIDAD: <em>TESIS</em></b>\n' + string_titulo_ti + '\n' +
+             'Más información sobre el proceso en ➡️ '
+             'https://fips.unsa.edu.pe/wp-content/uploads/2021/08/gyt_titulo_tesis.pdf \n',
         reply_markup=InlineKeyboardMarkup([
             [btn_back]
         ])
     )
     terminar(query, update)
+
+def titulacion_suficiencia_callback_handler(update, context):
+    # Consola retroalimentación
+    user_Name = update.effective_user["first_name"]
+    logger.info(f'El usuario {user_Name} ha seleccionado Trámites > Titulacion')
+    # boton
+    btn_back = InlineKeyboardButton(
+        text=' ⬅️Atrás',
+        callback_data="titulacion"
+    )
+    #Actualizando consulta
+    query = update.callback_query  # Recibe el mensaje
+    query.answer()  # Requerido. Responde silenciosamente
+
+    query.edit_message_text(
+        parse_mode='HTML',
+        text='<b>REQUISITOS PARA OBTENER EL TÍTULO PROFESIONAL</b>\n'
+             '<b>MODALIDAD: <em>SUFICIENCIA</em></b>\n' + string_titulo_suficiencia + '\n' +
+             'Más información sobre el proceso en ➡️ '
+             'https://fips.unsa.edu.pe/wp-content/uploads/2021/08/gyt_titulo_suficiencia.pdf\n',
+        reply_markup=InlineKeyboardMarkup([
+            [btn_back]
+        ])
+    )
+    terminar(query, update)
+
 
 def terminar_callback_handler(update, context):
     user_Name = update.effective_user["first_name"]
@@ -379,9 +417,11 @@ if __name__ == '__main__':
             CallbackQueryHandler(pattern='contacto', callback=contacto_callback_handler),
             CallbackQueryHandler(pattern='tramite', callback=tramites_callback_handler),
             CallbackQueryHandler(pattern='bachiller', callback=bachiller_callback_handler),
-            CallbackQueryHandler(pattern='titulacion', callback=titulacion_callback_handler),
             CallbackQueryHandler(pattern='bach_automatico', callback=bach_automatico_callback_handler),
             CallbackQueryHandler(pattern='bach_investigacion', callback=bach_investigacion_callback_handler),
+            CallbackQueryHandler(pattern='titulacion', callback=titulacion_callback_handler),
+            CallbackQueryHandler(pattern='titulo_tesis', callback=titulacion_tesis_callback_handler),
+            CallbackQueryHandler(pattern='titulo_suficiencia', callback=titulacion_suficiencia_callback_handler),
             CallbackQueryHandler(pattern='terminar', callback=terminar_callback_handler) #Terminar conversación
         ],
         states={},
