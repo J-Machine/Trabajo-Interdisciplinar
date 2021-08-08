@@ -137,21 +137,17 @@ def verificar(lista):
     if r_pal:
         if r_pal2:
             return 6
-        return 7
-    
-    if r_pal:
         if r_pal_1:
             return 16 
         if r_pal_3:
             return 17
+        return 7
 
     if r_pal2:
         if r_pal_1:
             return 18 
         if r_pal_2:
             return 19
-
-    if r_pal2:
         return 8
 
     if r_pal3:
