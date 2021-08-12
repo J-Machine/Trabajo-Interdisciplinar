@@ -11,7 +11,7 @@ from funcion import *
 from Bnts import *
 
 # Variables
-TOKEN = '1877045379:AAG0C4L_WQp0F-otZPJg0yevDNiavBhvFp0'
+TOKEN = '1862455246:AAHDE6lLYMHHYk7-p_rBSgf_L3CYRkO4IYA'
 
 # Configuracion de logging
 logging.basicConfig(
@@ -48,14 +48,10 @@ def start(update, context):
     # Lo que se muestra al ejecutar el comando /start
     update.message.reply_text(
         parse_mode='HTML',
-        text=' <b>BIENVENIDO AL CHATBOT DE CIENCIAS DE LA COMPUTACIÓN</b>\n',
-        #text=f'Hola {user_Name} ☺️.Gracias por usar nuestro bot.\n'
-        #     f'🤖: A continuación te mostraré los tipos de información que puedo brindarte. '
-        #     f'Sólo toca la opción que te interesa:',
-        #reply_markup=InlineKeyboardMarkup([
-        #    [btn_contacto],
-        #    [btn_tramites]
-        #])
+        text= f'<b>BIENVENIDO AL CHATBOT DE CIENCIAS DE LA COMPUTACIÓN</b>\n'
+                 f'🤖: Soy el bot  de la <b>Escuela Profesional de Ciencia de la Computación - UNSA</b>.\n'
+                 f'Puedo brindarte información sobre trámites de Bachiller y Título Profesional'
+                 f'Sólo escríbeme en el chat.',
     )
 
 

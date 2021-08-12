@@ -18,7 +18,7 @@ list_child_DB = list(bot_DB)  # Hijos de root
 main_nodo = list_child_DB[0]  # key del 1er nodo donde se almacena la informacion a mostrar en el bot
 
 
-# ### Funciones
+# ### Funciones para obtener los datos de Firebase
 def select_list_info(tramite):
     """ Devuelve la lista de:
         0: contacto,
@@ -47,48 +47,20 @@ def select_list_info(tramite):
         print("Creando lista de info Titulo suficiencia")
         return ref_titulo_suf.get()  # return a list type
 
+# Parse datos a String
+# ----------------------
+def print_info_contact(list_contact):
+    print('Actualizando información de contacto')
+    string_info = ''
+    for row in list_contact:
+        if isinstance(row, dict):
+            string_info += '▫️<b>' + row['Tipo Informacion'] + ':</b> ' + row['Información'] + '\n'
+    return string_info
 
-def print_requisitos(list_requerimientos, col_name, id_show=True):
-    """Pasar una lista con los requesitos, la clave de acceso a columna, si se muestra id,"""
-    for row_req in list_requerimientos:
-        if isinstance(row_req, dict) and id_show is True:
-            print(str(row_req['Id']) + '. ' + row_req[col_name])
-        elif isinstance(row_req, dict) and id is False:
-            print(row_req[col_name])
-
-
-# print('REQUISITOS BACHILLER \n')
-# print_requisitos(select_list_info(0), 'Información', True)
-
-
-# Obtener informacion de BD y construcción de string
-#---------------------------------------------------------
-list_info_contacto = select_list_info(0)
-string_contacto =''
-for row in list_info_contacto:
-    if isinstance(row, dict):
-        string_contacto += '▫️<b>' + row['Tipo Informacion'] + ':</b> ' + row['Información'] + '\n'
-
-req_bach_automatico = select_list_info(1)
-string_bach_automatico =''
-for row in req_bach_automatico:
-    if isinstance(row, dict):
-        string_bach_automatico += '▫️<b>' + str(row['Id']) + '.</b> ' + row['Requisito'] + '\n'
-
-req_bach_ti = select_list_info(2)
-string_bach_ti =''
-for row in req_bach_ti:
-    if isinstance(row, dict):
-        string_bach_ti += '▫️<b>' + str(row['Id']) + '.</b> ' + row['Requisito'] + '\n'
-
-req_titulo_ti = select_list_info(3)
-string_titulo_ti =''
-for row in req_titulo_ti:
-    if isinstance(row, dict):
-        string_titulo_ti += '▫️<b>' + str(row['Id']) + '.</b> ' + row['Requisito'] + '\n'
-
-req_titulo_suficiencia = select_list_info(4)
-string_titulo_suficiencia =''
-for row in req_titulo_suficiencia:
-    if isinstance(row, dict):
-        string_titulo_suficiencia += '▫️<b>' + str(row['Id']) + '.</b> ' + row['Requisito'] + '\n'
+def print_info_requisitos(list_with_info):
+    print('Actualizando requisitos')
+    string_info = ''
+    for row in list_with_info:
+        if isinstance(row, dict):
+            string_info += '▫️<b>' + str(row['Id']) + '.</b> ' + row['Requisito'] + '\n'
+    return string_info

@@ -209,6 +209,10 @@ def contac(update,context):
     chatId = update.message.chat_id
     userName = update.effective_user['first_name']
 
+    # Mostrar info
+    list_info_contacto = select_list_info(0)
+    string_contacto = print_info_contact(list_info_contacto)
+
     bot.sendMessage(  # se enviara un mensaje al chat
         chat_id = chatId,
         parse_mode='HTML',
@@ -256,6 +260,10 @@ def bachiller_investigacion(update, context):
     bot = context.bot
     chatId = update.message.chat_id
 
+    # Obtener info de DB
+    req_bach_ti = select_list_info(2)
+    string_bach_ti = print_info_requisitos(req_bach_ti)
+
     bot.sendMessage(#se enviara un mensaje al chat
         chat_id = chatId,
         parse_mode='HTML',
@@ -269,6 +277,10 @@ def bachiller_investigacion(update, context):
 def bachiller_automatico(update, context):
     bot = context.bot
     chatId = update.message.chat_id
+
+    # Obtener info de DB
+    req_bach_automatico = select_list_info(1)
+    string_bach_automatico = print_info_requisitos(req_bach_automatico)
 
     bot.sendMessage(#se enviara un mensaje al chat
         chat_id = chatId,
@@ -300,6 +312,10 @@ def titulo_investigacion(update, context):
     bot = context.bot
     chatId = update.message.chat_id
 
+    # Obtener info de DB
+    req_titulo_ti = select_list_info(3)
+    string_titulo_ti = print_info_requisitos(req_titulo_ti)
+
     bot.sendMessage(#se enviara un mensaje al chat
         chat_id = chatId,
         parse_mode='HTML',
@@ -312,6 +328,10 @@ def titulo_investigacion(update, context):
 def titulo_suficiencia(update, context):
     bot = context.bot
     chatId = update.message.chat_id
+
+    # Obtener info de DB
+    req_titulo_suficiencia = select_list_info(4)
+    string_titulo_suficiencia = print_info_requisitos(req_titulo_suficiencia)
 
     bot.sendMessage(#se enviara un mensaje al chat
         chat_id = chatId,

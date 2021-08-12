@@ -1,4 +1,6 @@
+import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, Filters
 import logging  # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
 from botDB import *
 
@@ -78,6 +80,10 @@ def contacto_callback_handler(update, context):
     query.answer()  # Requerido. Responde silenciosamente
     logger.info(f'El usuario {user_Name} ha solicitado información de Contacto')
 
+    # Mostrar info
+    list_info_contacto = select_list_info(0)
+    string_contacto = print_info_contact(list_info_contacto)
+
     query.edit_message_text(
         parse_mode='HTML',
         text=' <b>INFORMACIÓN DE CONTACTO DE LA EPCC</b>\n' + string_contacto,
@@ -140,6 +146,10 @@ def bach_automatico_callback_handler(update, context):
     query = update.callback_query  # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
 
+    # Obtener info de DB
+    req_bach_automatico = select_list_info(1)
+    string_bach_automatico = print_info_requisitos(req_bach_automatico)
+
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL GRADO ACADÉMICO DE BACHILLER</b>\n' 
@@ -163,6 +173,10 @@ def bach_investigacion_callback_handler(update, context):
     # Actualizando consulta
     query = update.callback_query  # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
+
+    # Obtener info de DB
+    req_bach_ti = select_list_info(2)
+    string_bach_ti = print_info_requisitos(req_bach_ti)
 
     query.edit_message_text(
         parse_mode='HTML',
@@ -206,6 +220,10 @@ def titul_suficiencia_callback_handler(update, context):
     query = update.callback_query  # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
 
+    # Obtener info de DB
+    req_titulo_suficiencia = select_list_info(4)
+    string_titulo_suficiencia = print_info_requisitos(req_titulo_suficiencia)
+
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL TITULO PROFESIONAL</b>\n'
@@ -225,6 +243,10 @@ def titul_investigacion_callback_handler(update, context):
     #Actualizando consulta
     query = update.callback_query  # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
+
+    # Obtener info de DB
+    req_titulo_ti = select_list_info(3)
+    string_titulo_ti = print_info_requisitos(req_titulo_ti)
 
     query.edit_message_text(
         parse_mode='HTML',
