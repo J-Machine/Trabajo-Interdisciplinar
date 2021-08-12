@@ -4,3 +4,4 @@ inspectionProfiles/
 .idea/workspace.xml
 .idea/Telegram-Bot.iml
 .idea/misc.xml
+ ./__pycache__/

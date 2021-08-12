@@ -7,11 +7,13 @@ import logging  # Ayuda a ver lo que sucede con el bot y mostrarlo en consola
 import telegram
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, ConversationHandler, MessageHandler, Filters
+from funcion import *
+from Bnts import *
 
 import botDB
 
 # Variables
-TOKEN = '1862455246:AAHDE6lLYMHHYk7-p_rBSgf_L3CYRkO4IYA'
+TOKEN = '1877045379:AAG0C4L_WQp0F-otZPJg0yevDNiavBhvFp0'
 
 # Configuracion de logging
 logging.basicConfig(
@@ -386,12 +388,111 @@ def terminar_callback_handler(update, context):
     query = update.callback_query   # Recibe el mensaje
     query.answer()  # Requerido. Responde silenciosamente
 
-    query.edit_message_text(
+#Funcion cuando se utilize el comando "/start"
+#-----------------------------------------------
+def start(update, context):
+    bot = context.bot
+    # chat_Id = update.message.chat_id
+    user_Name = update.effective_user["first_name"]
+    logger.info(f'El usuario {user_Name} ha iniciado(/start) el bot')   # Consola retroalimentación
+
+    # Lo que se muestra al ejecutar el comando /start
+    update.message.reply_text(
         parse_mode='HTML',
-        text=f' <b>🤖: Aqui tienes lo solicitado ☺️.</b>\n'
-             f'🤖: Si hay algo mas en lo que pueda ayudarte, escríbeme...',
+        text=' <b>BIENVENIDO AL CHATBOT DE CIENCIAS DE LA COMPUTACIÓN</b>\n',
+        #text=f'Hola {user_Name} ☺️.Gracias por usar nuestro bot.\n'
+        #     f'🤖: A continuación te mostraré los tipos de información que puedo brindarte. '
+        #     f'Sólo toca la opción que te interesa:',
+        #reply_markup=InlineKeyboardMarkup([
+        #    [btn_contacto],
+        #    [btn_tramites]
+        #])
     )
 
+
+# Funcion que recibe los mensajes del usuario
+# -----------------------------------------
+def mensaje(update, context):
+    bot = context.bot
+    updateMsg = getattr(update, 'message', None)
+    messageId = updateMsg.message_id  # Obtiene el id del mensaje
+    chatId = update.message.chat_id
+    userName = update.effective_user['first_name']
+    text = update.message.text  # obtener el texto que envio el usuario en el chat
+    logger.info(f'El usuario {userName} ha enviado un nuevo mensaje: "{text}" ;al chat {chatId}')
+    palabras = text.split()
+
+    if verificar(palabras)==1:
+        hola(update,context)
+    
+    if verificar(palabras)==2:
+        hola_uni(update,context)
+        tramites(update,context)
+
+    if verificar(palabras)==3:
+        hola_uni(update,context)
+        bachiller(update,context)
+
+    if verificar(palabras)==4:
+        hola_uni(update,context)
+        titulo_investigacion(update,context)
+        solicitud_confir(update, context)
+
+    if verificar(palabras)==5:
+        hola_uni(update,context)
+        contac(update,context)
+        solicitud_confir(update,context)
+
+    if verificar(palabras)==6:
+        tramites(update,context)
+
+    if verificar(palabras)==7:
+        bachiller(update,context)
+
+    if verificar(palabras)==8:
+        titulo_investigacion(update,context)
+        solicitud_confir(update,context)
+
+    if verificar(palabras)==9:
+        contac(update,context)
+        solicitud_confir(update,context)
+
+    if verificar(palabras)==10:
+        fin(update,context)
+    
+    if verificar(palabras)==11:
+        consultas_noespecifico(update,context)
+
+    if verificar(palabras)==12:
+        hola_uni(update,context)
+        bachiller_investigacion(update,context)
+    
+    if verificar(palabras)==13:
+        hola_uni(update,context)
+        bachiller_automatico(update,context)
+    
+    if verificar(palabras)==14:
+        hola_uni(update,context)
+        titulo_investigacion(update,context)
+    
+    if verificar(palabras)==15:
+        hola_uni(update,context)
+        titulo_suficiencia(update,context)
+    
+    if verificar(palabras)==16:
+        bachiller_investigacion(update,context)
+    
+    if verificar(palabras)==17:
+        bachiller_automatico(update,context)
+    
+    if verificar(palabras)==18:
+        titulo_investigacion(update,context)
+    
+    if verificar(palabras)==19:
+        titulo_suficiencia(update,context)
+
+    if verificar(palabras)==20:
+        titulo(update,context)
 
 # Main Function
 if __name__ == '__main__':
@@ -421,7 +522,7 @@ if __name__ == '__main__':
             CallbackQueryHandler(pattern='bach_investigacion', callback=bach_investigacion_callback_handler),
             CallbackQueryHandler(pattern='titulacion', callback=titulacion_callback_handler),
             CallbackQueryHandler(pattern='titulo_tesis', callback=titulacion_tesis_callback_handler),
-            CallbackQueryHandler(pattern='titulo_suficiencia', callback=titulacion_suficiencia_callback_handler),
+            CallbackQueryHandler(pattern='titulo_suficiencia', callback=titulacion_suficiencia_callbackgit bra  _handler),
             CallbackQueryHandler(pattern='terminar', callback=terminar_callback_handler) #Terminar conversación
         ],
         states={},
