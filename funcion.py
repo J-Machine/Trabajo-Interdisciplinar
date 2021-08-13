@@ -14,6 +14,7 @@ def verificar(lista):
     pal3 = [['Se', 'se', 'cre', 'ta'], ['Es', 'es', 'scu', 'ela', 'la'], ['Con', 'con', 'nta', 'act']]
     consul = ['Con', 'con', 'ons', 'nsu', 'sul', 'ult', 'lta']
     fin = ['gra', 'Gra', 'cia', 'ci', 'as']
+    # presentar = ['pre', 'Pre', 'sen', 'ta']
     cont = 0
     r_hello = False
     r_pal = False
