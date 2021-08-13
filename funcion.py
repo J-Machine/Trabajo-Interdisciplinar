@@ -304,7 +304,7 @@ def titulo(update, context):
     bot.sendMessage(
         chat_id=chatId,
         parse_mode='HTML',
-        text=f'🤖: Estas son las dos modalidades para obtener el <b>Grado de Bachiller</b> 👇',
+        text=f'🤖: Estas son las dos modalidades para obtener el <b>Grado de Titulación</b> 👇',
         reply_markup=InlineKeyboardMarkup([
             [btn_modo_suficiencia],
             [btn_modo_tinvestigacion],
