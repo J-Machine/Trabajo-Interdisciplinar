@@ -153,7 +153,8 @@ def bach_automatico_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL GRADO ACADÉMICO DE BACHILLER</b>\n' 
-             '<b>MODALIDAD: <em>BACHILLER AUTOMÁTICO 2021</em></b>\n' + string_bach_automatico,
+             '<b>MODALIDAD: <em>BACHILLER AUTOMÁTICO 2021</em></b>\n' + string_bach_automatico +
+             'Más información en ➡️ https://fips.unsa.edu.pe/tramites-administrativos-academicos/ \n',
         reply_markup=InlineKeyboardMarkup([
         ])
     )
@@ -181,7 +182,8 @@ def bach_investigacion_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL GRADO ACADÉMICO DE BACHILLER</b>\n'
-             '<b>MODALIDAD: <em>TRABAJO DE INVESTIGACIÓN</em></b>\n' + string_bach_ti,
+             '<b>MODALIDAD: <em>TRABAJO DE INVESTIGACIÓN</em></b>\n' + string_bach_ti +
+             'Más información en ➡️ https://fips.unsa.edu.pe/tramites-administrativos-academicos/ \n',
         reply_markup=InlineKeyboardMarkup([
         ])
     )
@@ -227,7 +229,9 @@ def titul_suficiencia_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL TITULO PROFESIONAL</b>\n'
-             '<b>MODALIDAD: <em>TRABAJO POR SUFICIENCIA</em></b>\n' + string_titulo_suficiencia,
+             '<b>MODALIDAD: <em>TRABAJO POR SUFICIENCIA</em></b>\n' + string_titulo_suficiencia +
+             'Más información sobre el proceso en ➡️ '
+             'https://fips.unsa.edu.pe/wp-content/uploads/2021/08/gyt_titulo_suficiencia.pdf\n',
              reply_markup=InlineKeyboardMarkup([
         ])
     )
@@ -251,7 +255,9 @@ def titul_investigacion_callback_handler(update, context):
     query.edit_message_text(
         parse_mode='HTML',
         text='<b>REQUISITOS PARA OBTENER EL TITULO PROFESIONAL</b>\n'
-             '<b>MODALIDAD: <em>TRABAJO DE INVESTIGACION</em></b>\n' + string_titulo_ti,
+             '<b>MODALIDAD: <em>TRABAJO DE INVESTIGACION</em></b>\n' + string_titulo_ti +
+             'Más información sobre el proceso en ➡️ '
+             'https://fips.unsa.edu.pe/wp-content/uploads/2021/08/gyt_titulo_tesis.pdf \n',
              reply_markup=InlineKeyboardMarkup([
         ])
     )
